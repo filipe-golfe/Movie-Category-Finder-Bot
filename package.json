@@ -1,0 +1,28 @@
+{
+  "name": "find-movie-category-bot",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon --watch *"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "brain.js": "^1.2.6",
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security"
+  }
+}

@@ -20,8 +20,8 @@ app.listen(PORT, () => {
   });
 });
 
-client.on('messageCreate', async (message) => {
+client.on('messageCreate', (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  await findMovie(message, prefix);
+  findMovie(message, prefix);
 });

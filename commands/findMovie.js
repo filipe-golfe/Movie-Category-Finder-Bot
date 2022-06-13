@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { findMovieCategory } from './findMovieCategory.js';
+import { manageJsonFile } from './manageJsonFile.js';
 import { findGenreById } from './findGenreById.js';
 import { removeAccentuation } from '../helpers.js';
 
-export const findMovie = async (message, prefix) => {
+export const findMovie = (message, prefix) => {
   let movieNameQuery = message.content
     .slice(prefix.length)
     .trimEnd()
@@ -12,11 +12,11 @@ export const findMovie = async (message, prefix) => {
 
   movieNameQuery = removeAccentuation(movieNameQuery);
 
-  await axios
+  axios
     .get(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.tmdb_token}&query=${movieNameQuery}&language=pt-BR`
     )
-    .then(async function (response) {
+    .then(async (response) => {
       if (response.data.total_results === 0) {
         return message.channel.send(
           'Nenhum filme foi encontrado com esse nome!'
@@ -25,12 +25,11 @@ export const findMovie = async (message, prefix) => {
 
       const [movieData] = response.data.results;
       const [genreId] = movieData.genre_ids;
-
       const genreName = await findGenreById(message, genreId);
-      console.log(genreName);
-      // findMovieCategory(message, movieData);
+
+      manageJsonFile(message, movieData, genreName);
     })
-    .catch(function (error) {
+    .catch((error) => {
       message.channel.send(`Ops! Ocorreu um erro ao buscar o filme: ${error}`);
     });
 };

@@ -20,7 +20,7 @@ app.listen(PORT, () => {
   });
 });
 
-client.on('messageCreate', (message) => {
+client.on('message', (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   findMovie(message, prefix);

@@ -1,4 +1,4 @@
-import '@tensorflow/tfjs';
+import '@tensorflow/tfjs-node';
 import * as use from '@tensorflow-models/universal-sentence-encoder';
 
 var scoresGlobal = [];

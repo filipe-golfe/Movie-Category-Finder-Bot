@@ -2,8 +2,8 @@ import fs from 'fs';
 import { suposeMovieCategory } from './suposeMovieCategory.js';
 
 export const manageJsonFile = (message, movieData, genreName) => {
-  movieData.overview = movieData.overview.replaceAll('"', '');
-  movieData.title = movieData.title.replaceAll('"', '');
+  movieData.overview = movieData.overview.replace(/['"]+/g, '');
+  movieData.title = movieData.title.replace(/['"]+/g, '');
 
   fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     if (err)

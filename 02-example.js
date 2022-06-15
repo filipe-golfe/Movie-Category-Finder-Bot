@@ -30,6 +30,7 @@ get_embeddings(list_sentences);
 
 function get_embeddings(list_sentences) {
   use.load().then((model) => {
+    console.log('entro no use');
     model.embed(list_sentences).then((embeddings) => {
       findSimilarity(embeddings);
     });

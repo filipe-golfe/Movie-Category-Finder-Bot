@@ -8,7 +8,7 @@ export const findMovie = (message, prefix) => {
     .slice(prefix.length)
     .trimEnd()
     .trimStart()
-    .replaceAll(/\s/g, '+');
+    .replace(/ /g, '+');
 
   movieNameQuery = removeAccentuation(movieNameQuery);
 

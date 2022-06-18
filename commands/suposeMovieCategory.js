@@ -2,10 +2,10 @@ import '@tensorflow/tfjs-node';
 import * as use from '@tensorflow-models/universal-sentence-encoder';
 
 var scoresGlobal = [];
+var modelCached = '';
 
 export const suposeMovieCategory = async (message, movieData, jsonData) => {
   message.channel.send(`Analisando...`);
-  // const inicio = performance.now();
 
   let jsonMovieTexts = [];
   Object.keys(jsonData).map((key) => [
@@ -29,32 +29,24 @@ export const suposeMovieCategory = async (message, movieData, jsonData) => {
     (item) => item.text === scoresGlobal[highestScoreIndex].textCompared
   );
 
-  // const fim = performance.now();
-  // console.log(`A operação levou ${fim - inicio} milissegundos`);
   return message.channel.send(`Categoria: ${category.category}`);
 };
 
 async function makeEmbeddings(jsonMovieTexts, movieData) {
-  // const inicio = performance.now();
+  modelCached = modelCached ? modelCached : await use.load();
+
   await Promise.all(
     jsonMovieTexts.map(async (movieText) => {
       let compare_sentences = [movieText, movieData.title];
       await get_embeddings(compare_sentences);
     })
   );
-  // const fim = performance.now();
-  // console.log(`A operação levou ${fim - inicio} milissegundos`);
 }
 
 async function get_embeddings(compare_sentences) {
-  // const inicio = performance.now();
-  await use.load().then(async (model) => {
-    await model.embed(compare_sentences).then((embeddings) => {
-      return findSimilarity(embeddings, compare_sentences);
-    });
+  await modelCached.embed(compare_sentences).then((embeddings) => {
+    return findSimilarity(embeddings, compare_sentences);
   });
-  // const fim = performance.now();
-  // console.log(`A operação levou ${fim - inicio} milissegundos`);
 }
 
 function findSimilarity(embeddings, compare_sentences) {

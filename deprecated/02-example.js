@@ -21,16 +21,18 @@ import * as use from '@tensorflow-models/universal-sentence-encoder';
 //   'The mouse ate the cat',
 // ];
 
-const list_sentences = [
-  'Annabelle Um casal se prepara para a chegada de sua primeira filha e compra para ela uma boneca. Quando sua casa é invadida por membros de uma seita, o casal é violentamente atacado e a boneca, Annabelle, se torna recipiente de uma entidade do mal.',
-  'Os Dez Mandamentos: O Filme Com efeitos especiais grandiosos e uma história emocionante, o filme produzido pela Record conta uma das mais famosas passagens da Bíblia: a saga de Moisés, desde seu nascimento até a chegada de seu povo à Terra Prometida, passando pela fuga do Egito através do Mar Vermelho e o encontro com Deus no Monte Sinai. Livre adaptação dos livros Êxodo, Levítico, Números e Deuteronômio, o filme cobre mais de cem anos de história, em tramas recheadas de emoção.',
-];
+// const list_sentences = [
+//   'Annabelle Um casal se prepara para a chegada de sua primeira filha e compra para ela uma boneca. Quando sua casa é invadida por membros de uma seita, o casal é violentamente atacado e a boneca, Annabelle, se torna recipiente de uma entidade do mal.',
+//   'Os Dez Mandamentos: O Filme Com efeitos especiais grandiosos e uma história emocionante, o filme produzido pela Record conta uma das mais famosas passagens da Bíblia: a saga de Moisés, desde seu nascimento até a chegada de seu povo à Terra Prometida, passando pela fuga do Egito através do Mar Vermelho e o encontro com Deus no Monte Sinai. Livre adaptação dos livros Êxodo, Levítico, Números e Deuteronômio, o filme cobre mais de cem anos de história, em tramas recheadas de emoção.',
+// ];
+const list_sentences = ['frase 1', 'frase 2'];
 
 get_embeddings(list_sentences);
 
 function get_embeddings(list_sentences) {
+  console.log('antes use');
   use.load().then((model) => {
-    console.log('entro no use');
+    console.log('no use');
     model.embed(list_sentences).then((embeddings) => {
       findSimilarity(embeddings);
     });

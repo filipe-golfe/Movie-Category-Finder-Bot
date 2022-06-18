@@ -13,6 +13,10 @@ export const manageJsonFile = (message, movieData, genreName) => {
 
     let jsonData = JSON.parse(data);
 
+    if (movieData.overview.length + movieData.title.length < 75) {
+      return tooFewArgumentsInMovieToStore(message, movieData, jsonData);
+    }
+
     const movieAlreadyInsertedInJSON = jsonData.find(
       (item) => item.text === movieData.title + ' ' + movieData.overview
     );
@@ -41,4 +45,11 @@ export const manageJsonFile = (message, movieData, genreName) => {
     message.channel.send(`Filme novo inserido: ${movieData.title}`);
     suposeMovieCategory(message, movieData, jsonData);
   });
+};
+
+const tooFewArgumentsInMovieToStore = (message, movieData, jsonData) => {
+  message.channel.send(
+    `Poucos argumentos na sinopse e nome do filme "${movieData.title}", o mesmo não será usado como futuro parâmetro de busca`
+  );
+  suposeMovieCategory(message, movieData, jsonData);
 };

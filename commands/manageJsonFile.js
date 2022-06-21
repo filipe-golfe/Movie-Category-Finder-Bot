@@ -28,6 +28,9 @@ export const manageJsonFile = (message, movieData, genreName) => {
       return suposeMovieCategory(message, movieData, jsonData);
     }
 
+    message.channel.send(`Filme novo inserido: ${movieData.title}`);
+    suposeMovieCategory(message, movieData, jsonData);
+
     jsonData.push({
       text: movieData.title + ' ' + movieData.overview,
       category: genreName,
@@ -41,9 +44,6 @@ export const manageJsonFile = (message, movieData, genreName) => {
           `Ops! Ocorreu um erro ao gravar a sinopse :(\n       Erro: ${err}`
         );
     });
-
-    message.channel.send(`Filme novo inserido: ${movieData.title}`);
-    suposeMovieCategory(message, movieData, jsonData);
   });
 };
 
